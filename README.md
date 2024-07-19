@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project Setup and API Usage Instructions
 
-## Getting Started
+## Step 1: Clone the Repository
 
-First, run the development server:
+Use the following link to clone the repository:
 
-```bash
+git clone <replace-with-git-repo-link>
+
+## Step 2: Install the Dependencies
+
+Navigate to the project directory and install the necessary dependencies:
+
+cd <project-directory>
+npm install
+
+## Step 3: Run the Local Server
+
+Start the local server on port 3000:
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Step 4: Test the Server
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+To verify that the server has started correctly, send a GET request to:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+http://localhost:3000/api/users/
 
-## Learn More
+You should receive the following response:
 
-To learn more about Next.js, take a look at the following resources:
+{
+"test": true
+}
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## User Authentication and Management
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Login
 
-## Deploy on Vercel
+To log in, send a POST request to:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+http://localhost:3000/api/users/
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+with the following body:
+
+{
+"password": "replace-with-password",
+"email": "replace-with-email"
+}
+
+The response will be in JSON format:
+
+{
+"request": true, // will be false if the email and password do not match
+"userId": "669a241512b59cf576b90e3b" // userId will not be included if request is false
+}
+
+### Create User
+
+To create a new user, send a POST request to:
+
+http://localhost:3000/api/users/adduser/
+
+with the following body:
+{
+"username": "replace-with-username",
+"email": "replace-with-email",
+"password": "replace-with-password"
+}
+
+The response will be in JSON format:
+
+{
+"request": true, // true when the user details are added successfully
+"userId": "6xxx241xxx59cfxxxxbxxe3b" // returns the user ID
+}
